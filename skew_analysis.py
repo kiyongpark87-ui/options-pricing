@@ -46,7 +46,7 @@ def get_delta_approx_strike(S, T, r, sigma, delta_target=0.25, option_type='put'
     try:
         return brentq(delta_diff, S * 0.7, S * 0.99) if option_type == 'put' else brentq(delta_diff, S * 1.01, S * 1.3)
     except Exception as e:
-        print(f"  brentq failed for {option_type}: {e}")
+        pass
         # Fallback: use fixed moneyness approximation
         if option_type == 'put':
             return S * (1 - sigma * np.sqrt(T) * 0.674)  # 0.674 ≈ N^-1(0.75)
